@@ -3,23 +3,23 @@
 
   <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark elegant-color fixed-top intro-fixed-nav">
     <!-- Navbar brand -->
-    <logo class="navbar-brand"><a routerLink="/"><strong>Photo Wall</strong></a></logo>
+    <logo class="navbar-brand font-weight-bold"><a routerLink="/">Photo Wall</a></logo>
 
     <!-- Collapsible content -->
     <links>
 
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item waves-light" mdbWavesEffect>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'intro'}" mdbWavesEffect id="intro-btn">
           <a class="nav-link" (click)="scrollToElement('intro')">Home</a>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'best-features'}" mdbWavesEffect id="best-features-btn">
           <a class="nav-link" (click)="scrollToElement('best-features')">Features</a>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'examples'}" mdbWavesEffect id="examples-btn">
           <a class="nav-link" (click)="scrollToElement('examples')">Examples</a>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'gallery'}" mdbWavesEffect id="gallery-btn">
           <a class="nav-link" (click)="scrollToElement('gallery')">Gallery</a>
         </li>
       </ul>

@@ -1,41 +1,76 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark elegant-color fixed-top">
-  <div class="container">
+<header class="h-100">
 
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark elegant-color fixed-top intro-fixed-nav">
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">{{title}}</a>
-
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <logo class="navbar-brand font-weight-bold"><a routerLink="/">Photo Wall</a></logo>
 
     <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
+    <links>
 
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Galleries
-            <span class="sr-only">(current)</span>
-          </a>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'intro'}" mdbWavesEffect id="intro-btn">
+          <a class="nav-link" (click)="scrollToElement('intro')">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Images</a>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'best-features'}" mdbWavesEffect id="best-features-btn">
+          <a class="nav-link" (click)="scrollToElement('best-features')">Features</a>
         </li>
-
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'examples'}" mdbWavesEffect id="examples-btn">
+          <a class="nav-link" (click)="scrollToElement('examples')">Examples</a>
+        </li>
+        <li class="nav-item waves-light" [ngClass]="{'active': currentTab === 'gallery'}" mdbWavesEffect id="gallery-btn">
+          <a class="nav-link" (click)="scrollToElement('gallery')">Gallery</a>
+        </li>
       </ul>
       <!-- Links -->
 
-      <form class="form-inline">
-        <div class="md-form mt-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        </div>
-      </form>
-    </div>
+      <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item avatar dropdown" dropdown>
+          <a class="nav-link dropdown-toggle waves-light" mdbWavesEffect id="navbarDropdownMenuLink-5" dropdownToggle aria-haspopup="true" aria-expanded="true">
+            <img src="assets/img/login.png" class="rounded-circle z-depth-0" alt="avatar image">
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown-secondary" role="menu" aria-labelledby="navbarDropdownMenuLink-5">
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Login</a>
+          </div>
+        </li>
+      </ul>
+
+    </links>
     <!-- Collapsible content -->
 
+  </mdb-navbar>
+
+
+  <!--Mask-->
+  <div id="intro" class="view">
+
+    <div class="mask rgba-black-strong">
+
+      <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+
+        <div class="row d-flex justify-content-center text-center">
+
+          <div class="col-md-10">
+
+            <!-- Heading -->
+            <h2 class="display-4 font-weight-bold white-text pt-5 mb-2">Travel</h2>
+
+            <!-- Divider -->
+            <hr class="hr-light">
+
+            <!-- Description -->
+            <h4 class="white-text my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti consequuntur.</h4>
+            <button type="button" class="btn btn-outline-white">Read more<i class="fa fa-book ml-2"></i></button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-</nav>
-<!--/.Navbar-->
+  <!--/.Mask-->
+</header>

@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() title: string;
 
-  currentTab = 'intro';
+  currentTab = 'home';
 
   scrollToElement(id): void {
     const el = document.getElementById(id);
@@ -18,7 +20,15 @@ export class HeaderComponent implements OnInit {
     this.currentTab = id;
   }
 
-  constructor() { }
+  constructor(
+      private route: ActivatedRoute,
+      private location: Location
+  ) { }
+
+  logInfo() {
+    console.log(this.route);
+    console.log(this.location);
+  }
 
   ngOnInit() {
   }

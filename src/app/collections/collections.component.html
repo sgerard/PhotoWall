@@ -1,3 +1,5 @@
-<p>
-  collections works!
-</p>
+<div class="container pt-5">
+  <div class="card-columns pt-5">
+    <app-collection *ngFor="let collection of collections" [collection]="collection"></app-collection>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CollectionsComponent } from './collections/collections.component';
 import { CollectionComponent } from './collection/collection.component';
+import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CollectionComponent } from './collection/collection.component';
     FooterComponent,
     MainComponent,
     CollectionsComponent,
-    CollectionComponent
+    CollectionComponent,
+    CollectionDetailComponent
   ],
   imports: [
     BrowserModule,

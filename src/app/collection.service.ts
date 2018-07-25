@@ -12,5 +12,9 @@ export class CollectionService {
     return of(COLLECTIONS);
   }
 
+  getCollection(id: number): Observable<Collection> {
+    return of(COLLECTIONS.find(collection => collection.id === id));
+  }
+
   constructor() { }
 }

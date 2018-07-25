@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Collection} from '../collection';
 import {ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 import {CollectionService} from '../collection.service';
 
 @Component({
@@ -26,6 +27,10 @@ export class CollectionDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.collectionService.getCollection(id)
       .subscribe(collection => this.collection = collection);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {COLLECTIONS} from './mock-collections';
 import {Collection} from './collection';
 import {Observable, of} from 'rxjs';
+import 'rxjs/add/operator/mergeMap';
+
+import { AngularFireLiteFirestore } from 'angularfire-lite';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +12,12 @@ import {Observable, of} from 'rxjs';
 export class CollectionService {
 
   getCollections(): Observable<Collection[]> {
-    return of(COLLECTIONS);
+    return this.firestore.read('galleries');
   }
 
   getCollection(id: number): Observable<Collection> {
-    return of(COLLECTIONS.find(collection => collection.id === id));
+    return this.firestore.query('galleries').where('id', '==', id).limit(1).on().mergeMap(a => a);
   }
 
-  constructor() { }
+  constructor(public firestore: AngularFireLiteFirestore) { }
 }

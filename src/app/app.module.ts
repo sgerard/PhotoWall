@@ -11,6 +11,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { CollectionsComponent } from './collections/collections.component';
 import { CollectionComponent } from './collection/collection.component';
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
+import {AngularFireLite} from 'angularfire-lite';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CollectionDetailComponent } from './collection-detail/collection-detail
   ],
   imports: [
     BrowserModule,
+    AngularFireLite.forRoot(environment.config),
     MDBBootstrapModule.forRoot(),
     AppRoutingModule
   ],

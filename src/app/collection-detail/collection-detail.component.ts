@@ -26,7 +26,10 @@ export class CollectionDetailComponent implements OnInit {
   getCollection(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.collectionService.getCollection(id)
-      .subscribe(collection => this.collection = collection);
+      .subscribe(collection => {
+        console.log(collection.title);
+        this.collection = collection;
+      });
   }
 
   goBack(): void {

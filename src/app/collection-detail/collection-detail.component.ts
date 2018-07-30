@@ -27,7 +27,6 @@ export class CollectionDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.collectionService.getCollection(id)
       .subscribe(collection => {
-        console.log(collection.title);
         this.collection = collection;
       });
   }

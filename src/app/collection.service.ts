@@ -16,7 +16,7 @@ export class CollectionService {
   }
 
   getCollection(id: number): Observable<Collection> {
-    return this.firestore.query('galleries').where('id', '==', id).limit(1).on().mergeMap(a => a);
+    return this.firestore.query('galleries').where('id', '==', id).limit(1).on().map(a => a[0]);
   }
 
   constructor(public firestore: AngularFireLiteFirestore) { }

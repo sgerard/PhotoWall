@@ -1,5 +1,7 @@
 <div class="container pt-5">
-  <section id="collection-details" class="pt-5"></section>
-  <h1 class="white-text">{{collection.title}}</h1>
-  <p class="grey-text">{{collection.description}}</p>
+  <div *ngIf="collection">
+    <section id="collection-details" class="pt-5"></section>
+    <h1 class="white-text">{{collection.title}}</h1>
+    <p class="grey-text">{{collection.description}}</p>
+  </div>
 </div>

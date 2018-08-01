@@ -11,7 +11,7 @@ import {CollectionService} from '../collection.service';
 })
 export class CollectionDetailComponent implements OnInit {
 
-  @Input() collection: Collection;
+  collection: Collection;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class CollectionDetailComponent implements OnInit {
   }
 
   getCollection(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.collectionService.getCollection(id)
       .subscribe(collection => {
         this.collection = collection;

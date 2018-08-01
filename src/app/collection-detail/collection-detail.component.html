@@ -1,7 +1,7 @@
 <div class="container pt-5">
-  <div *ngIf="collection">
+  <div *ngIf="collection.metadata">
     <section id="collection-details" class="pt-5"></section>
-    <h1 class="white-text">{{collection.title}}</h1>
-    <p class="grey-text">{{collection.description}}</p>
+    <h1 class="white-text">{{collection.metadata.title}}</h1>
+    <p class="grey-text">{{collection.metadata.description}}</p>
   </div>
 </div>

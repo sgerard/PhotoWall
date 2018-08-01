@@ -71,7 +71,7 @@ return bucket.file(filePath).download({destination: tempLocalFile}).then(() => {
     caption: fileParts.filename,
     metadata: metadata
   };
-  return doc.collection('photos').add(data);
+  return doc.collection('photos').update(data);
 }).then(() => {
   console.log('Wrote to:', filePath, 'data:', metadata);
 return null;

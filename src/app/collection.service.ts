@@ -14,8 +14,8 @@ export class CollectionService {
     return this.firestore.read('photos');
   }
 
-  getCollection(id: number): Observable<Collection> {
-    return this.firestore.query('galleries').where('id', '==', id).limit(1).on().map(a => a[0]);
+  getCollection(id: string): Observable<Collection> {
+    return this.firestore.read('photos/' + id);
   }
 
   constructor(public firestore: AngularFireLiteFirestore) { }

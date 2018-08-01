@@ -1,7 +1,7 @@
 export class Collection {
-  id: number;
-  title: string;
-  description: string;
-  picture: string;
-  count:  number;
+  metadata: {
+    title: string;
+    description: string;
+  };
+  photos: object[];
 }

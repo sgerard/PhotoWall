@@ -26,11 +26,22 @@ admin.initializeApp();
 const gcs = require('@google-cloud/storage')();
 const spawn = require('child-process-promise').spawn;
 
+const splitPath = function(path) {
+    const result = path.replace(/\\/g, "/").match(/(.*\/)?(\..*?|.*?)(\.[^.]*?)?(#.*$|\?.*$|$)/);
+    return {
+        dirname: result[1].slice(0, -1) || "",
+        filename: result[2] || "",
+        extension: result[3] || "",
+        params: result[4] || ""
+    };
+};
+
 /**
  * When an image is uploaded in the Storage bucket the information and metadata of the image (the
  * output of ImageMagick's `identify -verbose`) is saved in the Realtime Database.
  */
 exports.metadata = functions.storage.object().onFinalize((object) => {
+    console.log(object);
   const filePath = object.name;
 
 // Create random filename with same extension as uploaded file.
@@ -46,14 +57,21 @@ if (!object.contentType.startsWith('image/')) {
 let metadata;
 // Download file from bucket.
 const bucket = gcs.bucket(object.bucket);
+console.log('Start computing');
 return bucket.file(filePath).download({destination: tempLocalFile}).then(() => {
   // Get Metadata from image.
   return spawn('identify', ['-verbose', tempLocalFile], {capture: ['stdout', 'stderr']})
 }).then((result) => {
   // Save metadata to realtime datastore.
   metadata = imageMagickOutputToObject(result.stdout);
-const safeKey = makeKeyFirebaseCompatible(filePath + '/metadata');
-return admin.firestore().ref(safeKey).set(metadata);
+  const fileParts = splitPath(filePath);
+  console.log(fileParts);
+  const doc = admin.firestore().doc(fileParts.dirname);
+  const data = {
+    caption: fileParts.filename,
+    metadata: metadata
+  };
+  return doc.collection('photos').add(data);
 }).then(() => {
   console.log('Wrote to:', filePath, 'data:', metadata);
 return null;
@@ -78,10 +96,10 @@ function imageMagickOutputToObject(output) {
     const currentIdent = line.search(/\S/);
   line = line.trim();
   if (line.endsWith(':')) {
-    lines[index] = makeKeyFirebaseCompatible(`"${line.replace(':', '":{')}`);
+    lines[index] = `"${line.replace(':', '":{')}`;
   } else {
     const split = line.replace('"', '\\"').split(': ');
-    split[0] = makeKeyFirebaseCompatible(split[0]);
+    split[0] = split[0];
     lines[index] = `"${split.join('":"')}",`;
   }
   if (currentIdent < previousLineIndent) {
@@ -95,12 +113,4 @@ function imageMagickOutputToObject(output) {
   output = JSON.parse(output);
   console.log('Metadata extracted from image', output);
   return output;
-}
-
-/**
- * Makes sure the given string does not contain characters that can't be used as Firebase
- * Realtime Database keys such as '.' and replaces them by '*'.
- */
-function makeKeyFirebaseCompatible(key) {
-  return key.replace(/\./g, '*');
 }

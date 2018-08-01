@@ -16,7 +16,10 @@ export class CollectionsComponent implements OnInit {
 
   getCollections(): void {
     this.collectionService.getCollections()
-      .subscribe(collections => this.collections = collections);
+      .subscribe(collections => {
+        console.log(collections);
+        this.collections = collections;
+      });
   }
 
   ngOnInit() {

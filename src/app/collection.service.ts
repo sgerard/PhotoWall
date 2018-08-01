@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {COLLECTIONS} from './mock-collections';
 import {Collection} from './collection';
 import {Observable, of} from 'rxjs';
 import 'rxjs/add/operator/mergeMap';
@@ -12,7 +11,7 @@ import { AngularFireLiteFirestore } from 'angularfire-lite';
 export class CollectionService {
 
   getCollections(): Observable<Collection[]> {
-    return this.firestore.read('galleries');
+    return this.firestore.read('photos');
   }
 
   getCollection(id: number): Observable<Collection> {

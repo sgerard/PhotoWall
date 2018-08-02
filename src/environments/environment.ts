@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'photowall-edb93.firebaseapp.com',
     databaseURL: 'https://photowall-edb93.firebaseio.com',
     projectId: 'photowall-edb93',
-    storageBucket: '',
+    storageBucket: 'photowall-edb93.appspot.com',
     messagingSenderId: '454747777894'
   }
 };

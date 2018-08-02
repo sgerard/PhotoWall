@@ -68,10 +68,11 @@ return bucket.file(filePath).download({destination: tempLocalFile}).then(() => {
   console.log(fileParts);
   const doc = admin.firestore().doc(fileParts.dirname);
   const data = {
-    caption: fileParts.filename,
+    caption: '',
+    filename: fileParts.filename + fileParts.extension,
     metadata: metadata
   };
-  return doc.collection('photos').update(data);
+  return doc.collection('photos').add(data);
 }).then(() => {
   console.log('Wrote to:', filePath, 'data:', metadata);
 return null;

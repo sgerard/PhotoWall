@@ -3,6 +3,7 @@ import {Collection} from '../collection';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {CollectionService} from '../collection.service';
+import {Photo} from '../photo';
 
 @Component({
   selector: 'app-collection-detail',
@@ -12,6 +13,7 @@ import {CollectionService} from '../collection.service';
 export class CollectionDetailComponent implements OnInit {
 
   collection: Collection;
+  photos: Photo[];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,15 @@ export class CollectionDetailComponent implements OnInit {
     this.collectionService.getCollection(id)
       .subscribe(collection => {
         this.collection = collection;
+        this.collectionService.getPhotos(id)
+          .subscribe(photos => {
+            this.photos = photos;
+            this.photos.forEach(photo => {
+              const filePath = `photos/${this.collection.metadata.title}/${photo.filename}`;
+              this.collectionService.getPhotoUrl(filePath).subscribe(url => photo.url = url);
+              console.log(this.collection);
+            });
+          });
       });
   }
 

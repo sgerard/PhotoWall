@@ -13,6 +13,7 @@ import { CollectionComponent } from './collection/collection.component';
 import { CollectionDetailComponent } from './collection-detail/collection-detail.component';
 import {AngularFireLite} from 'angularfire-lite';
 import {environment} from '../environments/environment';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {environment} from '../environments/environment';
     MainComponent,
     CollectionsComponent,
     CollectionComponent,
-    CollectionDetailComponent
+    CollectionDetailComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,

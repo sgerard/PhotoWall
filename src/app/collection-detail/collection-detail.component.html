@@ -3,5 +3,8 @@
     <section id="collection-details" class="pt-5"></section>
     <h1 class="white-text">{{collection.metadata.title}}</h1>
     <p class="grey-text">{{collection.metadata.description}}</p>
+    <div class="card-columns pt-2">
+      <app-photo *ngFor="let photo of photos" [photo]="photo"></app-photo>
+    </div>
   </div>
 </div>

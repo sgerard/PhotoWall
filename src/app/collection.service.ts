@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Collection} from './collection';
-import {Observable, of} from 'rxjs';
+import {Photo} from './photo';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/mergeMap';
 
-import { AngularFireLiteFirestore } from 'angularfire-lite';
+import { AngularFireLiteFirestore, AngularFireLiteStorage } from 'angularfire-lite';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,14 @@ export class CollectionService {
     return this.firestore.read('photos/' + id);
   }
 
-  constructor(public firestore: AngularFireLiteFirestore) { }
+  getPhotos(id: string): Observable<Photo[]> {
+    return this.firestore.read('photos/' + id + '/photos');
+  }
+
+  getPhotoUrl(filePath: string): Observable<any> {
+    console.log('filepath', filePath);
+    return this.storage.download(filePath);
+  }
+
+  constructor(public firestore: AngularFireLiteFirestore, public storage: AngularFireLiteStorage) { }
 }
